@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arcgis.WebApi", "Arcgis.WebApi\Arcgis.WebApi.csproj", "{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02_服务层", "02_服务层", "{EFD3C892-7C04-4185-8E03-0D3363B430B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_应用层", "01_应用层", "{7EF4AE4C-F48E-4043-ACDE-00FF56894967}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arcgis", "Arcgis\Arcgis.csproj", "{2D8A65B1-2C94-476C-8B33-33C87B4167B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03_数据操作层", "03_数据操作层", "{7D36CACE-F6D2-4B03-A9B1-C46D1D5BECAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataNs", "DataNs\DataNs.csproj", "{1A2C018A-104C-489D-BF9E-A1A0C584BC15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04_通用实体层", "04_通用实体层", "{CFD93D3E-27A4-43BA-81D7-4838B55FEA8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universal.Models", "Universal.Models\Universal.Models.csproj", "{EB2097E7-F6AF-4506-B295-40950225145D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8A65B1-2C94-476C-8B33-33C87B4167B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8A65B1-2C94-476C-8B33-33C87B4167B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8A65B1-2C94-476C-8B33-33C87B4167B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8A65B1-2C94-476C-8B33-33C87B4167B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2C018A-104C-489D-BF9E-A1A0C584BC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2C018A-104C-489D-BF9E-A1A0C584BC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2C018A-104C-489D-BF9E-A1A0C584BC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2C018A-104C-489D-BF9E-A1A0C584BC15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2097E7-F6AF-4506-B295-40950225145D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2097E7-F6AF-4506-B295-40950225145D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2097E7-F6AF-4506-B295-40950225145D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2097E7-F6AF-4506-B295-40950225145D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3D03DD30-85B2-4D6E-991B-25A8A5C3A3EF} = {7EF4AE4C-F48E-4043-ACDE-00FF56894967}
+		{2D8A65B1-2C94-476C-8B33-33C87B4167B9} = {EFD3C892-7C04-4185-8E03-0D3363B430B9}
+		{1A2C018A-104C-489D-BF9E-A1A0C584BC15} = {7D36CACE-F6D2-4B03-A9B1-C46D1D5BECAC}
+		{EB2097E7-F6AF-4506-B295-40950225145D} = {CFD93D3E-27A4-43BA-81D7-4838B55FEA8B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17470738-3A89-47C7-A72A-DC804B4A336F}
+	EndGlobalSection
+EndGlobal
