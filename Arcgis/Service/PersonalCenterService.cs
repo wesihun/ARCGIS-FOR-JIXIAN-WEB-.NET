@@ -32,7 +32,7 @@ namespace Arcgis.Service
                     .Select((de1, de2, de3) => new ManagePersonalCenter
                     {
                        applyid = de1.applyid,
-                       name = de2.username,
+                       name = de2.realname,
                        depname = de1.depname,
                        postname = de3.postname,
                        phone = de2.telephone,
@@ -67,18 +67,78 @@ namespace Arcgis.Service
         {
             using (var db = _dbContext.GetIntance())
             {
-                var model = new ApplyEntity()
+                try
                 {
-                    reson = reson,
-                    state = states
-                };
-                var count = db.Updateable(model)
-                .UpdateColumns(it => new { it.reson, it.state })
-                .Where(it => it.applyid == applyid)
-                .ExecuteCommand();
-                result = count > 0 ? true : false;
+                    db.Ado.BeginTran();
+                    var model = new ApplyEntity()
+                    {
+                        reson = reson,
+                        state = states
+                    };
+                    db.Updateable(model)
+                    .UpdateColumns(it => new { it.reson, it.state })
+                    .Where(it => it.applyid == applyid)
+                    .ExecuteCommand();
+                    var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
+                    LogEntity logEntity = new LogEntity()
+                    {
+                        userid = userid,
+                        createtime = DateTime.Now,
+                        logtitle = "审核"
+                    };
+                    switch (states)
+                    {
+                        case 1:
+                            logEntity.logcontent = "通过";
+                            break;
+                        case -1:
+                            logEntity.logcontent = "退回";
+                            break;
+                    }
+                    db.Insertable(logEntity).ExecuteCommand();
+                    db.Ado.CommitTran();
+                }
+                catch (Exception)
+                {
+                    db.Ado.RollbackTran();
+                    return false;
+                }
+                return true;
             }
-            return result;
+        }
+        public bool Download(int applyid)
+        {
+            using (var db = _dbContext.GetIntance())
+            {
+                try
+                {
+                    db.Ado.BeginTran();
+                    var model = new ApplyEntity()
+                    {
+                        state = 2
+                    };
+                    db.Updateable(model)
+                    .UpdateColumns(it => new { it.state })
+                    .Where(it => it.applyid == applyid)
+                    .ExecuteCommand();
+                    var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
+                    LogEntity logEntity = new LogEntity()
+                    {
+                        userid = userid,
+                        createtime = DateTime.Now,
+                        logtitle = "下载",
+                        logcontent = "已下载"
+                    };
+                    db.Insertable(logEntity).ExecuteCommand();
+                    db.Ado.CommitTran();
+                }
+                catch (Exception)
+                {
+                    db.Ado.RollbackTran();
+                    return false;
+                }
+                return true;
+            }
         }
         public int GetNoticeCount(int userid)
         {

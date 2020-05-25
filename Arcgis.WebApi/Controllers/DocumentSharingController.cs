@@ -112,7 +112,7 @@ namespace Arcgis.WebApi.Controllers
             try
             {
                 #region 验证
-                if (model.userid == 0 || string.IsNullOrEmpty(model.username) || model.depid == 0)
+                if (model.userid == 0 || model.resourceid == 0 || string.IsNullOrEmpty(model.username) || model.depid == 0)
                 {
                     resultModel.code = -1;
                     resultModel.msg = "存在必填项!";

@@ -76,6 +76,7 @@ namespace Arcgis.WebApi
             #region 注入相关的应用服务
             services.AddScoped<ISpecialInvestigationService, SpecialInvestigationService>();
             services.AddScoped<IPersonalCenterService, PersonalCenterService>();
+            services.AddScoped<IlogService, LogService>();
             #endregion
 
             #region swaggerp配置

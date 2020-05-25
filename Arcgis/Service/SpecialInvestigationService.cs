@@ -68,10 +68,27 @@ namespace Arcgis.Service
         {
             using (var db = _dbContext.GetIntance())
             {
-                var count = db.Insertable(entity).ExecuteCommand();
-                result = count > 0 ? true : false;
+                try
+                {
+                    db.Ado.BeginTran();
+                    db.Insertable(entity).IgnoreColumns(it => it.applyid).ExecuteCommand();
+                    LogEntity logEntity = new LogEntity()
+                    {
+                        userid = entity.userid,
+                        createtime = DateTime.Now,
+                        logtitle = "新增",
+                        logcontent = "提交下载申请"
+                    };
+                    db.Insertable(logEntity).ExecuteCommand();
+                    db.Ado.CommitTran();
+                }
+                catch (Exception)
+                {
+                    db.Ado.RollbackTran();
+                    return false;
+                }
+                return true;
             }
-            return result;
         }
         #endregion
     }

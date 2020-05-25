@@ -15,10 +15,14 @@ namespace Arcgis.WebApi.Controllers
     public class SpecialInvestigationController : ControllerBase
     {
         private readonly ISpecialInvestigationService _specailService;
-        public SpecialInvestigationController(ISpecialInvestigationService specailService)
+
+        private readonly IlogService _logService;
+        public SpecialInvestigationController(IlogService logService, ISpecialInvestigationService specailService)
         {
+            _logService = logService;
             _specailService = specailService;
         }
+
         #region 获取数据  
         /// <summary>
         /// 获取专项调查列表并分页
@@ -145,13 +149,14 @@ namespace Arcgis.WebApi.Controllers
             try
             {
                 #region 验证
-                if (model.userid == 0 || string.IsNullOrEmpty(model.username) || model.depid  ==0)
+                if (model.userid == 0 || model.resourceid == 0 || string.IsNullOrEmpty(model.username) || model.depid  ==0)
                 {
                     resultModel.code = -1;
                     resultModel.msg = "存在必填项!";
                     return Ok(resultModel);
                 }
                 #endregion
+
                 model.createtime = DateTime.Now;
                 model.state = 0;
                 model.type = 1;

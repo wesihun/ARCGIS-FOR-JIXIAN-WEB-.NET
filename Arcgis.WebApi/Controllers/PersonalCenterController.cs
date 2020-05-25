@@ -193,5 +193,47 @@ namespace Arcgis.WebApi.Controllers
                 return Ok(resultModel);
             }
         }
+        /// <summary>
+        /// 下载记录状态
+        /// </summary>
+        /// <remarks>
+        /// 说明:
+        /// 用户下载时调用
+        /// </remarks>
+        /// <param name="applyid">申请主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Download(int applyid)
+        {
+            var resultCountModel = new RespResultCountViewModel();
+            try
+            {
+                if (applyid == 0)
+                {
+                    resultCountModel.code = -1;
+                    resultCountModel.msg = "存在必填项!";
+                    return Ok(resultCountModel);
+                }
+                bool flag = _personalcenterService.Download(applyid);
+                if (flag)
+                {
+                    resultCountModel.code = 0;
+                    resultCountModel.msg = "成功";
+                }
+                else
+                {
+                    resultCountModel.code = -1;
+                    resultCountModel.msg = "失败";
+                }
+                
+                return Ok(resultCountModel);
+            }
+            catch (Exception ex)
+            {
+                resultCountModel.code = -1;
+                resultCountModel.msg = "操作失败！原因：" + ex.Message;
+                return Ok(resultCountModel);
+            }
+        }
     }
 }
