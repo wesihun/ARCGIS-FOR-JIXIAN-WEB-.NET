@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataNs", "DataNs\DataNs.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04_通用实体层", "04_通用实体层", "{CFD93D3E-27A4-43BA-81D7-4838B55FEA8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universal.Models", "Universal.Models\Universal.Models.csproj", "{EB2097E7-F6AF-4506-B295-40950225145D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universal.Models", "Universal.Models\Universal.Models.csproj", "{EB2097E7-F6AF-4506-B295-40950225145D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05_工具层", "05_工具层", "{E69B0EC7-92CC-43EA-A846-1BB07F62AB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

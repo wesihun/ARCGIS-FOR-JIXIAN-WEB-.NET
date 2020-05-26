@@ -41,8 +41,9 @@ namespace Arcgis.IService
         /// <param name="states"></param>
         /// <returns></returns>
         bool Examine(int applyid, string reson,int states);
-
         bool Download(int applyid);
+        bool Operation(int applyid,int states);
+        bool OperationBatch(List<int> applyids, int states);
         #endregion
     }
 }

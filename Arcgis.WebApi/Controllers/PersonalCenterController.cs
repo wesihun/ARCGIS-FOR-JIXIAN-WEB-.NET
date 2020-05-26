@@ -177,12 +177,12 @@ namespace Arcgis.WebApi.Controllers
                 if (result)
                 {
                     resultModel.code = 0;
-                    resultModel.msg = "新增成功";
+                    resultModel.msg = "成功";
                 }
                 else
                 {
                     resultModel.code = -1;
-                    resultModel.msg = "新增失败";
+                    resultModel.msg = "失败";
                 }
                 return Ok(resultModel);
             }
@@ -233,6 +233,109 @@ namespace Arcgis.WebApi.Controllers
                 resultCountModel.code = -1;
                 resultCountModel.msg = "操作失败！原因：" + ex.Message;
                 return Ok(resultCountModel);
+            }
+        }
+        /// <summary>
+        /// 审核管理员 单条 取消审核 与 删除
+        /// </summary>
+        /// <remarks>
+        /// 说明:
+        /// states:1 为取消审核传入   2 为删除传入
+        /// </remarks>
+        /// <param name="applyid">申请id主键</param>
+        /// <param name="states">状态</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Operation(int applyid, int states)
+        {
+            RespResultViewModel resultModel = new RespResultCountViewModel();
+            try
+            {
+                #region 验证
+                if (applyid == 0 || states == 0)
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "存在必填项!";
+                    return Ok(resultModel);
+                }
+                if (states != 1 || states !=2)
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "states传入错误!";
+                    return Ok(resultModel);
+                }
+                #endregion
+
+                bool result = _personalcenterService.Operation(applyid,states);
+                if (result)
+                {
+                    resultModel.code = 0;
+                    resultModel.msg = "操作成功";
+                }
+                else
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "操作失败";
+                }
+                return Ok(resultModel);
+            }
+            catch (Exception ex)
+            {
+                resultModel.code = -1;
+                resultModel.msg = "操作失败" + ex.ToString();
+                return Ok(resultModel);
+            }
+        }
+        /// <summary>
+        /// 审核管理员 批量 取消审核 与 删除
+        /// </summary>
+        /// <remarks>
+        /// 说明:
+        /// states:1 为取消审核传入   2 为删除传入
+        /// applyids 为int数组
+        /// </remarks>
+        /// <param name="applyids">申请id主键</param>
+        /// <param name="states">状态</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult OperationBatch(List<int> applyids, int states)
+        {
+            RespResultViewModel resultModel = new RespResultCountViewModel();
+            try
+            {
+                #region 验证
+                if (applyids.Count() == 0 || states == 0)
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "存在必填项!";
+                    return Ok(resultModel);
+                }
+                if (states != 1 || states != 2)
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "states传入错误!";
+                    return Ok(resultModel);
+                }
+                #endregion
+
+                bool result = _personalcenterService.OperationBatch(applyids, states);
+                if (result)
+                {
+                    resultModel.code = 0;
+                    resultModel.msg = "操作成功";
+                }
+                else
+                {
+                    resultModel.code = -1;
+                    resultModel.msg = "操作失败";
+                }
+                return Ok(resultModel);
+            }
+            catch (Exception ex)
+            {
+                resultModel.code = -1;
+                resultModel.msg = "操作失败" + ex.ToString();
+                return Ok(resultModel);
             }
         }
     }

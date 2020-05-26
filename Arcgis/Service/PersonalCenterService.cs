@@ -79,7 +79,7 @@ namespace Arcgis.Service
                     .UpdateColumns(it => new { it.reson, it.state })
                     .Where(it => it.applyid == applyid)
                     .ExecuteCommand();
-                    var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
+                    int userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
                     LogEntity logEntity = new LogEntity()
                     {
                         userid = userid,
@@ -98,8 +98,9 @@ namespace Arcgis.Service
                     db.Insertable(logEntity).ExecuteCommand();
                     db.Ado.CommitTran();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    string error = ex.Message.ToString();
                     db.Ado.RollbackTran();
                     return false;
                 }
@@ -140,6 +141,121 @@ namespace Arcgis.Service
                 return true;
             }
         }
+        /// <summary>
+        /// states:1 为取消审核传入   2 为删除传入
+        /// </summary>
+        /// <param name="applyid"></param>
+        /// <param name="states"></param>
+        /// <returns></returns>
+        public bool Operation(int applyid, int states)
+        {
+            using (var db = _dbContext.GetIntance())
+            {
+                try
+                {
+                    db.Ado.BeginTran();
+                    var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
+                    if (states == 1)
+                    {
+
+                        var model = new ApplyEntity()
+                        {
+                            state = 0
+                        };
+                        db.Updateable(model)
+                           .UpdateColumns(it => new { it.state })
+                           .Where(it => it.applyid == applyid)
+                           .ExecuteCommand();
+                        LogEntity logEntity = new LogEntity()
+                        {
+                            userid = userid,
+                            createtime = DateTime.Now,
+                            logtitle = "审核管理员操作",
+                            logcontent = "取消审核 该applyid为" + applyid
+                        };
+                        db.Insertable(logEntity).ExecuteCommand();
+                    }
+                    else
+                    {
+                        db.Deleteable<ApplyEntity>().Where(it => it.applyid == applyid).ExecuteCommand();
+                        LogEntity logEntity = new LogEntity()
+                        {
+                            userid = userid,
+                            createtime = DateTime.Now,
+                            logtitle = "审核管理员操作",
+                            logcontent = "删除 该applyid为" + applyid
+                        };
+                        db.Insertable(logEntity).ExecuteCommand();
+                    }
+                    db.Ado.CommitTran();
+                }
+                catch (Exception)
+                {
+                    db.Ado.RollbackTran();
+                    return false;
+                }
+                return true;
+            }
+        }
+        /// <summary>
+        /// states:1 为取消审核传入   2 为删除传入
+        /// </summary>
+        /// <param name="applyids"></param>
+        /// <param name="states"></param>
+        /// <returns></returns>
+        public bool OperationBatch(List<int> applyids, int states)
+        {
+            using (var db = _dbContext.GetIntance())
+            {
+                try
+                {
+                    db.Ado.BeginTran();
+                    foreach (var id in applyids)
+                    {
+                        var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == id).First().userid;
+                        if (states == 1)
+                        {
+                            var model = new ApplyEntity()
+                            {
+                                state = 0
+                            };
+                            db.Updateable(model)
+                               .UpdateColumns(it => new { it.state })
+                               .Where(it => it.applyid == id)
+                               .ExecuteCommand();
+                            LogEntity logEntity = new LogEntity()
+                            {
+                                userid = userid,
+                                createtime = DateTime.Now,
+                                logtitle = "审核管理员操作",
+                                logcontent = "取消审核 该applyid为" + id
+                            };
+                            db.Insertable(logEntity).ExecuteCommand();
+                        }
+                        else
+                        {
+                            db.Deleteable<ApplyEntity>().Where(it => it.applyid == id).ExecuteCommand();
+                            LogEntity logEntity = new LogEntity()
+                            {
+                                userid = userid,
+                                createtime = DateTime.Now,
+                                logtitle = "审核管理员操作",
+                                logcontent = "删除 该applyid为" + id
+                            };
+                            db.Insertable(logEntity).ExecuteCommand();
+                        }
+                    }
+                    db.Ado.CommitTran();
+                }
+                catch (Exception)
+                {
+                    db.Ado.RollbackTran();
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public int GetNoticeCount(int userid)
         {
             int count = 0;
