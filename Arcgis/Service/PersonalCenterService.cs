@@ -27,8 +27,8 @@ namespace Arcgis.Service
                     JoinType.Left,de1.userid == de2.userid,
                     JoinType.Left,de2.postid == de3.postid
                     }).Where((de1, de2, de3) => de2.state == 1)
-                    .WhereIF(states != 0 && states == 1,(de1, de2, de3) => de1.state == 1 || de1.state == 2)
-                    .WhereIF(states != 0 && states != 1, (de1, de2, de3) => de1.state == states)
+                    .WhereIF(states == 1,(de1, de2, de3) => de1.state == 1 || de1.state == 2)
+                    .WhereIF(states != 1, (de1, de2, de3) => de1.state == states)
                     .Select((de1, de2, de3) => new ManagePersonalCenter
                     {
                        applyid = de1.applyid,
@@ -51,8 +51,8 @@ namespace Arcgis.Service
                 DataResult = db.Queryable<ApplyEntity, ResourceEntity>((de1, de2) => new object[] {
                     JoinType.Left,de1.resourceid == de2.resourceid
                     }).Where((de1, de2) => de1.userid == userid)
-                    .WhereIF(states != 0 && states == 1, (de1, de2) => de1.state == 1 || de1.state == 2)
-                    .WhereIF(states != 0 && states != 1, (de1, de2) => de1.state == states)
+                    .WhereIF(states == 1, (de1, de2) => de1.state == 1 || de1.state == 2)
+                    .WhereIF(states != 1, (de1, de2) => de1.state == states)
                      .Select((de1, de2) => new PersonalCenter
                      {
                          applytime = de1.createtime,
