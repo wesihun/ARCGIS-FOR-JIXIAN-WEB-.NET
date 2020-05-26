@@ -310,7 +310,7 @@ namespace Arcgis.WebApi.Controllers
                     resultModel.msg = "存在必填项!";
                     return Ok(resultModel);
                 }
-                if (states != 1 || states != 2)
+                if (states != 1 && states != 2)
                 {
                     resultModel.code = -1;
                     resultModel.msg = "states传入错误!";
