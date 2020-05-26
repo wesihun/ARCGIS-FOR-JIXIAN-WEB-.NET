@@ -57,7 +57,8 @@ namespace Arcgis.Service
                      {
                          applytime = de1.createtime,
                          reson = de1.reson,
-                         resourcename = de2.resourcename
+                         resourcename = de2.resourcename,
+                         url = de2.url
                      }).ToPageList(pageIndex, pageSize, ref totalCount);
             }
             return DataResult;

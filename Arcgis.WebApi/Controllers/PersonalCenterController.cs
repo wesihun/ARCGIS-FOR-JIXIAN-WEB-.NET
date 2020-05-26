@@ -79,7 +79,7 @@ namespace Arcgis.WebApi.Controllers
             int totalcount = 0;
             try
             {
-                if (userid == 0 || states == 0)
+                if (userid == 0)
                 {
                     resultCountModel.code = -1;
                     resultCountModel.msg = "存在必填项!";
