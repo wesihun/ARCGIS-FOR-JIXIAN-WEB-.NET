@@ -64,7 +64,7 @@ namespace Arcgis.WebApi.Controllers
             }
         }
         /// <summary>
-        /// 获取文档共享左侧列表
+        /// 获取文档共享左侧树列表
         /// </summary>
         /// <returns></returns> 
         [HttpGet]
