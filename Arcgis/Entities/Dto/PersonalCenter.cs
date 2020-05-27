@@ -10,5 +10,6 @@ namespace Arcgis.Entities.Dto
         public string reson { get; set; }
         public DateTime applytime { get; set; }
         public string url { get; set; }
+        public int applyid { get; set; }
     }
 }

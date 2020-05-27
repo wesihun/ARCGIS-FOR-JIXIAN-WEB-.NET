@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universal.Models", "Univers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05_工具层", "05_工具层", "{E69B0EC7-92CC-43EA-A846-1BB07F62AB88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{440FCC97-1B06-488A-A9D0-7F09F41640DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{EB2097E7-F6AF-4506-B295-40950225145D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB2097E7-F6AF-4506-B295-40950225145D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2097E7-F6AF-4506-B295-40950225145D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440FCC97-1B06-488A-A9D0-7F09F41640DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440FCC97-1B06-488A-A9D0-7F09F41640DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440FCC97-1B06-488A-A9D0-7F09F41640DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440FCC97-1B06-488A-A9D0-7F09F41640DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{2D8A65B1-2C94-476C-8B33-33C87B4167B9} = {EFD3C892-7C04-4185-8E03-0D3363B430B9}
 		{1A2C018A-104C-489D-BF9E-A1A0C584BC15} = {7D36CACE-F6D2-4B03-A9B1-C46D1D5BECAC}
 		{EB2097E7-F6AF-4506-B295-40950225145D} = {CFD93D3E-27A4-43BA-81D7-4838B55FEA8B}
+		{440FCC97-1B06-488A-A9D0-7F09F41640DC} = {E69B0EC7-92CC-43EA-A846-1BB07F62AB88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17470738-3A89-47C7-A72A-DC804B4A336F}

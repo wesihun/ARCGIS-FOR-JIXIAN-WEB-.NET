@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Universal.Models;
 
 namespace Arcgis.IService
 {
@@ -15,7 +16,7 @@ namespace Arcgis.IService
         /// <param name="pageSize">页尺寸</param>
         /// <param name="totalCount">返回数目</param>
         /// <returns></returns>
-        List<ResourceEntity> GetPageListByCondition(int typeid,int pageIndex, int pageSize, ref int totalCount);
+        List<ResourceEntity> GetPageListByCondition(string name, int typeid,int pageIndex, int pageSize, ref int totalCount);
         /// <summary>
         /// 获取部门列表
         /// </summary>
@@ -25,7 +26,7 @@ namespace Arcgis.IService
         /// 获取资源类型列表
         /// </summary>
         /// <returns></returns>
-        List<ResourceTypeEntity> GetResourceTypeList(int type);
+        List<TreeModel> GetResourceTypeList();
         #endregion
 
         #region 提交数据

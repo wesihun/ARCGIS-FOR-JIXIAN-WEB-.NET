@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Arcgis.IService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Universal.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -194,7 +196,7 @@ namespace Arcgis.WebApi.Controllers
             }
         }
         /// <summary>
-        /// 下载记录状态
+        /// 下载
         /// </summary>
         /// <remarks>
         /// 说明:
@@ -214,19 +216,22 @@ namespace Arcgis.WebApi.Controllers
                     resultCountModel.msg = "存在必填项!";
                     return Ok(resultCountModel);
                 }
-                bool flag = _personalcenterService.Download(applyid);
-                if (flag)
+                string resultPath = _personalcenterService.Download(applyid);              
+                if (!string.IsNullOrEmpty(resultPath))
                 {
-                    resultCountModel.code = 0;
-                    resultCountModel.msg = "成功";
+                    //var filepath = @"F:\resource\images\1.jpg";
+                    var provider = new FileExtensionContentTypeProvider();
+                    FileInfo fileInfo = new FileInfo(resultPath);
+                    var ext = fileInfo.Extension;
+                    new FileExtensionContentTypeProvider().Mappings.TryGetValue(ext, out var contenttype);
+                    return File(System.IO.File.ReadAllBytes(resultPath), contenttype ?? "application/octet-stream", fileInfo.Name);
                 }
                 else
                 {
                     resultCountModel.code = -1;
                     resultCountModel.msg = "失败";
+                    return Ok(resultCountModel);
                 }
-                
-                return Ok(resultCountModel);
             }
             catch (Exception ex)
             {

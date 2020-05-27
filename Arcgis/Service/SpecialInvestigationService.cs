@@ -4,7 +4,10 @@ using DataNs.SqlSugar;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Universal.Models;
+using Utilities;
 
 namespace Arcgis.Service
 {
@@ -16,14 +19,25 @@ namespace Arcgis.Service
         {
             _dbContext = dbContext;
         }
-        public List<ResourceEntity> GetPageListByCondition(int typeid,int pageIndex, int pageSize, ref int totalCount)
+        public List<ResourceEntity> GetPageListByCondition(string name, int typeid,int pageIndex, int pageSize, ref int totalCount)
         {
             var DataResult = new List<ResourceEntity>();
             using (var db = _dbContext.GetIntance())
             {
+                List<int> typeids = new List<int>();
+                var list = db.Queryable<ResourceTypeEntity>().Where(it => it.parentid == typeid).ToList(); 
+                if(list.Count() != 0)
+                {
+                    typeids = list.Select(it => it.resourcetypeid).ToList();
+                }
+                else
+                {
+                    typeids.Add(typeid);
+                }
                 DataResult = db.Queryable<ResourceEntity, ResourceTypeEntity>((de1, de2) => new object[] {
                     JoinType.Left,de1.resourcetypeid == de2.resourcetypeid
-                    }).WhereIF(typeid != 0, (de1, de2) => de1.resourcetypeid == typeid)
+                    }).WhereIF(typeid != 0, (de1, de2) => typeids.Contains(de1.resourcetypeid))
+                    .WhereIF(!string.IsNullOrEmpty(name), (de1, de2) => de1.resourcename == name)
                     .Select((de1, de2) => new ResourceEntity
                     {
                        resourceid = de1.resourceid,
@@ -49,12 +63,16 @@ namespace Arcgis.Service
             }
             return DataResult;
         }
-        public List<ResourceTypeEntity> GetResourceTypeList(int type)
+        public List<TreeModel> GetResourceTypeList()
         {
-            var DataResult = new List<ResourceTypeEntity>();
+            var DataResult = new List<TreeModel>();
             using (var db = _dbContext.GetIntance())
             {
-                DataResult = db.Queryable<ResourceTypeEntity>().Where(it => it.type == type).OrderBy(it => it.SortCode).ToList();
+                var data = db.Queryable<ResourceTypeEntity>().ToList();
+                DataResult = Tree.CreateTree(
+                    data.Where(it => it.parentid == 0).Select(x => new TreeModel { menueid = x.resourcetypeid, menuename = x.resourcetype, parentmenueid = x.parentid }).ToList(),
+                    data.Where(it => it.parentid != 0).Select(x => new TreeModel { menueid = x.resourcetypeid, menuename = x.resourcetype, parentmenueid = x.parentid }).ToList()
+                    );               
             }
             return DataResult;
         }

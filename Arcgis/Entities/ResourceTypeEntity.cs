@@ -16,6 +16,10 @@ namespace Arcgis.Entities
         /// </summary>
         public int resourcetypeid { get; set; }
         /// <summary>
+        /// 父id
+        /// </summary>
+        public int parentid { get; set; }
+        /// <summary>
         /// 资源类型名 
         /// </summary>
         public string resourcetype { get; set; }       
@@ -27,9 +31,5 @@ namespace Arcgis.Entities
         /// 排序 
         /// </summary>
         public string SortCode { get; set; }
-        /// <summary>
-        /// 类型  1专项调查  2资源共享 
-        /// </summary>
-        public int type { get; set; }
     }
 }

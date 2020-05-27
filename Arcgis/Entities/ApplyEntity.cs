@@ -49,10 +49,6 @@ namespace Arcgis.Entities
         /// </summary>
         public string reson { get; set; }
         /// <summary>
-        /// 1.专项调查   2.文档共享
-        /// </summary>
-        public int type { get; set; }
-        /// <summary>
         ///  创建时间
         /// </summary>
         public DateTime createtime { get; set; }

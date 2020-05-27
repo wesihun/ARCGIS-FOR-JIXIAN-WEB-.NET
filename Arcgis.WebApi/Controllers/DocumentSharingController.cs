@@ -27,19 +27,21 @@ namespace Arcgis.WebApi.Controllers
         /// <remarks>
         /// 说明:
         /// typeid:点击左侧文档共享类别获取的类别编号
+        /// typeid为0 查看所有
         /// </remarks>
+        /// <param name="name">查询条件</param>
         /// <param name="typeid">文档类型编号</param>
         /// <param name="page">当前页</param>
         /// <param name="limit">每页行数</param>
         /// <returns></returns>  
         [HttpGet]
-        public IActionResult GetPageListByCondition(int typeid, int page, int limit)
+        public IActionResult GetPageListByCondition(string name,int typeid, int page, int limit)
         {
             var resultCountModel = new RespResultCountViewModel();
             int totalcount = 0;
             try
             {
-                var dataResult = _specailService.GetPageListByCondition(typeid, page, limit, ref totalcount);
+                var dataResult = _specailService.GetPageListByCondition(name,typeid, page, limit, ref totalcount);
                 if (dataResult != null)
                 {
                     resultCountModel.code = 0;
@@ -72,7 +74,7 @@ namespace Arcgis.WebApi.Controllers
             int totalcount = 0;
             try
             {
-                var dataResult = _specailService.GetResourceTypeList(2);
+                var dataResult = _specailService.GetResourceTypeList();
                 if (dataResult != null)
                 {
                     resultCountModel.code = 0;
@@ -121,7 +123,6 @@ namespace Arcgis.WebApi.Controllers
                 #endregion
                 model.createtime = DateTime.Now;
                 model.state = 0;
-                model.type = 2;
                 bool result = _specailService.InsertApply(model);
                 if (result)
                 {

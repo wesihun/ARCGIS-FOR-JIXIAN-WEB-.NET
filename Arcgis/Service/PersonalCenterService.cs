@@ -51,14 +51,15 @@ namespace Arcgis.Service
                 DataResult = db.Queryable<ApplyEntity, ResourceEntity>((de1, de2) => new object[] {
                     JoinType.Left,de1.resourceid == de2.resourceid
                     }).Where((de1, de2) => de1.userid == userid)
-                    .WhereIF(states == 1, (de1, de2) => de1.state == 1 || de1.state == 2)
-                    .WhereIF(states != 1, (de1, de2) => de1.state == states)
+                    .Where((de1, de2) => de1.state == states)
                      .Select((de1, de2) => new PersonalCenter
                      {
                          applytime = de1.createtime,
                          reson = de1.reson,
                          resourcename = de2.resourcename,
-                         url = de2.url
+                         url = de2.url,
+                         applyid = de1.applyid
+
                      }).ToPageList(pageIndex, pageSize, ref totalCount);
             }
             return DataResult;
@@ -108,8 +109,9 @@ namespace Arcgis.Service
                 return true;
             }
         }
-        public bool Download(int applyid)
+        public string Download(int applyid)
         {
+            string resourcedir = string.Empty;
             using (var db = _dbContext.GetIntance())
             {
                 try
@@ -123,6 +125,8 @@ namespace Arcgis.Service
                     .UpdateColumns(it => new { it.state })
                     .Where(it => it.applyid == applyid)
                     .ExecuteCommand();
+                    var resourceid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().resourceid;
+                    resourcedir = db.Queryable<ResourceEntity>().Where(it => it.resourceid == resourceid).First().resourcedir;
                     var userid = db.Queryable<ApplyEntity>().Where(it => it.applyid == applyid).First().userid;
                     LogEntity logEntity = new LogEntity()
                     {
@@ -137,9 +141,9 @@ namespace Arcgis.Service
                 catch (Exception)
                 {
                     db.Ado.RollbackTran();
-                    return false;
+                    return "";
                 }
-                return true;
+                return resourcedir;
             }
         }
         /// <summary>
