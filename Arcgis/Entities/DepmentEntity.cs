@@ -23,7 +23,7 @@ namespace Arcgis.Entities
         /// <summary>
         /// 父类Id 
         /// </summary>
-        public string parentid { get; set; }
+        public int parentid { get; set; }
         ///  创建时间
         /// </summary>
         public DateTime createtime { get; set; }

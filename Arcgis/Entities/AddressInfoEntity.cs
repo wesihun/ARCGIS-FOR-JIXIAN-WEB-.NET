@@ -6,30 +6,31 @@ using System.Text;
 namespace Arcgis.Entities
 {
     /// <summary>
-    /// 日志表
+    /// 行政区划表
     /// </summary>
-    [SugarTable("tb_log")]
-    public class LogEntity
+    [SugarTable("tb_addressinfo")]
+    public class AddressInfoEntity
     {
         /// <summary>
-        /// 日志id 
+        ///  
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)] //是主键
-        public int logid { get; set; }
+        public int id { get; set; }
         /// <summary>
-        /// 用户id
+        ///  
         /// </summary>
-        public int userid { get; set; }
+        public int ParentId { get; set; }
         /// <summary>
-        /// 日志标题 
+        ///  
         /// </summary>
-        public string logtitle { get; set; }
+        public string Name { get; set; }
         /// <summary>
-        /// 日志内容 
+        ///  
         /// </summary>
-        public string logcontent { get; set; }
-        ///  创建时间
+        public string TreeCode { get; set; }
+        /// <summary>
+        ///  
         /// </summary>
-        public DateTime createtime { get; set; }
+        public string Remark { get; set; }
     }
 }

@@ -52,5 +52,28 @@ namespace Arcgis.Entities
         /// 状态   1为已审核通过 
         /// </summary>
         public int state { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Age { get; set; }
+        /// <summary>
+        ///  
+        /// </summary>
+        public string IDcard { get; set; }
+        /// <summary>
+        ///  
+        /// </summary>
+        public string Mail { get; set; }
+        /// <summary>
+        ///  乡镇
+        /// </summary>
+        public string XAreaId { get; set; }
+        /// <summary>
+        ///  村
+        /// </summary>
+        public string CAreaId { get; set; }
+
+        [SugarColumn(IsIgnore = true)]
+        public string postname { get; set; }
     }
 }

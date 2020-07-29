@@ -8,7 +8,7 @@ namespace Arcgis.Entities
     /// <summary>
     /// 轮播图表
     /// </summary>
-    [SugarTable("tb_apply")]
+    [SugarTable("tb_banner")]
     public class BannerEntity
     {
         /// <summary>

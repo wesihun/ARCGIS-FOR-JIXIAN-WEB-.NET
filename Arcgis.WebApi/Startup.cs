@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,24 +33,12 @@ namespace Arcgis.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             #region 获取链接字符串
-            IConfigurationSection defaultConnection;
-            //获取链接字符串11
-            var connectionStrings = Configuration.GetSection("ConnectionStrings");
-            var dataBaseType = connectionStrings.GetSection("DataBaseType");
-            switch (dataBaseType.Value.ToString())
-            {
-                case "SqlServer":
-                    defaultConnection = connectionStrings.GetSection("SqlConnection");
-                    break;
-                case "MySql":
-                    defaultConnection = connectionStrings.GetSection("SqlConnection");
-                    break;
-                default:
-                    defaultConnection = connectionStrings.GetSection("OracleConnection");
-                    break;
-            }
-            DbContext._dataBaseType = dataBaseType.Value.ToString();
-            DbContext.DefaultDbConnectionString = defaultConnection.Value.ToString();
+            DbContext._dataBaseType = Configuration["ConnectionStrings:DataBaseType"];
+            DbContext.DefaultDbConnectionString =  Configuration["ConnectionStrings:SqlConnection"];
+            #endregion
+
+            #region 获取路径
+            DbContext.UploadPath = Configuration["ConnectionStrings:UploadPath"];
             #endregion
 
             #region 配置跨域处理
@@ -77,6 +66,7 @@ namespace Arcgis.WebApi
             services.AddScoped<ISpecialInvestigationService, SpecialInvestigationService>();
             services.AddScoped<IPersonalCenterService, PersonalCenterService>();
             services.AddScoped<IlogService, LogService>();
+            services.AddScoped<IOtherService, OtherService>();
             #endregion
 
             #region swaggerp配置
@@ -118,6 +108,13 @@ namespace Arcgis.WebApi
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                //优先客户端指定数据格式
+                options.RespectBrowserAcceptHeader = true;
+                //添加xml数据格式的输出
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

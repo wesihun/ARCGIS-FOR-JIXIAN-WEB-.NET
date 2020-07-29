@@ -1,7 +1,9 @@
-﻿using Arcgis.Entities.Dto;
+﻿using Arcgis.Entities;
+using Arcgis.Entities.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Universal.Models;
 
 namespace Arcgis.IService
 {
@@ -15,7 +17,25 @@ namespace Arcgis.IService
         /// <param name="pageSize">页尺寸</param>
         /// <param name="totalCount">返回数目</param>
         /// <returns></returns>
-        List<ManagePersonalCenter> GetManageList(int states,int pageIndex, int pageSize, ref int totalCount);
+        List<ManagePersonalCenter> GetManageList(string states,int pageIndex, int pageSize, ref int totalCount);
+        /// <summary>
+        /// 获取个人资料管理列表
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="userid">userid</param>
+        /// <returns></returns>  
+        UserEntity GetPerInfo(int userid);
+
+        bool PostPerInfo(UserEntity entity);
+
+        List<AddressInfoEntity> GetAreaInfo1();
+
+        List<AddressInfoEntity> GetAreaInfo2(int userid);
+
+        List<PostEntity> GetPostList();
+
+        List<TreeModel> GetDepList();
         /// <summary>
         /// 正常个人中心列表
         /// </summary>
@@ -41,7 +61,7 @@ namespace Arcgis.IService
         /// <param name="states"></param>
         /// <returns></returns>
         bool Examine(int applyid, string reson,int states);
-        string Download(int applyid);
+        string Download(int applyid,string type);
         bool Operation(int applyid,int states);
         bool OperationBatch(List<int> applyids, int states);
         #endregion

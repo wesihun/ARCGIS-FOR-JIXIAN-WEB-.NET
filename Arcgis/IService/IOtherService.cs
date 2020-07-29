@@ -18,6 +18,11 @@ namespace Arcgis.IService
         /// </summary>
         /// <returns></returns>
         List<NoticeEntity> GetNoticeList(int istitle);
+
+        bool PostLog(int userid, string content);
+
+        List<LogEntity> GetLog(int userid, int pageIndex, int pageSize, ref int totalCount);
+        int GetLoginCount(int userid);
         #endregion
     }
 }

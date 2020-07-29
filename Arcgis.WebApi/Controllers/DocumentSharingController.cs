@@ -33,12 +33,12 @@ namespace Arcgis.WebApi.Controllers
         /// <param name="typeid">文档类型编号</param>
         /// <param name="page">当前页</param>
         /// <param name="limit">每页行数</param>
-        /// <returns></returns>  
+        /// <returns></returns>   
         [HttpGet]
         public IActionResult GetPageListByCondition(string name,int typeid, int page, int limit)
         {
             var resultCountModel = new RespResultCountViewModel();
-            int totalcount = 0;
+            int totalcount = 0; 
             try
             {
                 var dataResult = _specailService.GetPageListByCondition(name,typeid, page, limit, ref totalcount);

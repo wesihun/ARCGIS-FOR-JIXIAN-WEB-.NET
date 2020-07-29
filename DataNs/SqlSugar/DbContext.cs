@@ -16,10 +16,8 @@ namespace DataNs.SqlSugar
         public static string DefaultDbConnectionStringForYb { get; set; }
         public static DbType _dbType { get; set; }
         public static string _dataBaseType { get; set; }
-        //风险点二维码生成路径
-        public static string QRPath { get; set; }
-        //exel模板路径
-        public static string EXCELPATH { get; set; }
+        //文件上传路径
+        public static string UploadPath { get; set; }
 
         /// <summary>
         /// 获得SqlSugarClient(使用该方法, 默认请手动释放资源, 如using(var db = SugarBase.GetIntance()){你的代码}, 如果把isAutoCloseConnection参数设置为true, 则无需手动释放, 会每次操作数据库释放一次, 可能会影响性能, 请自行判断使用)

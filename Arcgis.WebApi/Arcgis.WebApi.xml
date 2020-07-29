@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Arcgis.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Arcgis.WebApi.Controllers.DocumentSharingController.GetPageListByCondition(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取文档共享列表并分页
+            </summary>
+            <remarks>
+            说明:
+            typeid:点击左侧文档共享类别获取的类别编号
+            typeid为0 查看所有
+            </remarks>
+            <param name="name">查询条件</param>
+            <param name="typeid">文档类型编号</param>
+            <param name="page">当前页</param>
+            <param name="limit">每页行数</param>
+            <returns></returns>   
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.DocumentSharingController.GetDocumentTypeList">
+            <summary>
+            获取文档共享左侧树列表
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.DocumentSharingController.CreateApply(Arcgis.Entities.ApplyEntity)">
+            <summary>
+            文档共享下载提交申请操作
+            </summary>
+            <remarks>
+            说明:
+            model:参数传json字符串   key值为resourceid userid  username depid depname  applyreason（申请用途）
+            </remarks>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.OtherController.GetBannerList">
+            <summary>
+            获取轮播列表
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.OtherController.GetNoticeList(System.Int32)">
+            <summary>
+            获取公告列表
+            </summary>
+            <remarks>
+            说明:
+            istitle:1 头条公告  0不是
+            </remarks>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.OtherController.PostLog(System.Int32,System.String)">
+            <summary>
+            浏览记录调用接口
+            </summary>
+            <remarks>
+            说明:
+            content  内容自定义   登录时传入content:登入系统  （退出系统）
+            </remarks>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.OtherController.GetLog(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            浏览记录列表显示
+            </summary>
+            <remarks>
+            
+            </remarks>
+            <returns></returns> 
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetManageList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取审核管理员个人中心审核管理列表
+            </summary>
+            <remarks>
+            说明:
+            states:0审核中  1已通过   -1退回  传空为所有
+            </remarks>
+            <param name="states">状态</param>
+            <param name="page">当前页</param>
+            <param name="limit">每页行数</param>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetPerInfo(System.Int32)">
+            <summary>
+            获取个人资料管理列表
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="userid">userid</param>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.PostPerInfo(Arcgis.Entities.UserEntity)">
+            <summary>
+            提交个人信息
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="model">model</param>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetAreaInfo1">
+            <summary>
+            获取乡镇下拉
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetAreaInfo2(System.Int32)">
+            <summary>
+            获取村级下拉
+            </summary>
+            <remarks>
+            id为下拉获取的id
+            </remarks>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetPostList">
+            <summary>
+            获取岗位下拉
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetDepList">
+            <summary>
+            获取部门下拉
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>  
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetPersonList(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            个人中心获取下载管理列表
+            </summary>
+            <remarks>
+            说明:
+            states:1已通过  2已下载  -1退回
+            </remarks>
+            <param name="userid">用户id</param>
+            <param name="states">状态</param>
+            <param name="page">当前页</param>
+            <param name="limit">每页行数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.GetNoticeCount(System.Int32)">
+            <summary>
+            获取消息通知
+            </summary>
+            <remarks>
+            说明:
+            消息通知包括 已通过  已退回   暂定只显示条数
+            </remarks>
+            <param name="userid">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.Examine(System.Int32,System.String,System.Int32)">
+            <summary>
+            审核管理员审核提交
+            </summary>
+            <remarks>
+            说明:
+            states:1已通过 -1退回
+            </remarks>
+            <param name="applyid">申请id主键</param>
+            <param name="reson">说明</param>
+            <param name="states">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arcgis.WebApi.Controllers.PersonalCenterController.Download(System.Int32)">
+            <summary>
+            下载
+            </summary>
+            <remarks>
+            说明:
+            用户下载时调用
+            </remarks>
+            <param name="applyid">申请主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arcgis.WebApi.HttpHeaderOperation.Apply(Swashbuckle.AspNetCore.Swagger.Operation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            实现接口
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>

@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universal.Models", "Univers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05_工具层", "05_工具层", "{E69B0EC7-92CC-43EA-A846-1BB07F62AB88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{440FCC97-1B06-488A-A9D0-7F09F41640DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{440FCC97-1B06-488A-A9D0-7F09F41640DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

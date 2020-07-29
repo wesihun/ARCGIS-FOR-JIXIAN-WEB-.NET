@@ -25,8 +25,8 @@ namespace Arcgis.Service
             using (var db = _dbContext.GetIntance())
             {
                 List<int> typeids = new List<int>();
-                var list = db.Queryable<ResourceTypeEntity>().Where(it => it.parentid == typeid).ToList(); 
-                if(list.Count() != 0)
+                var list = db.Queryable<ResourceTypeEntity>().Where(it => it.parentid == typeid).ToList();
+                if (list.Count() != 0)
                 {
                     typeids = list.Select(it => it.resourcetypeid).ToList();
                 }
@@ -36,8 +36,10 @@ namespace Arcgis.Service
                 }
                 DataResult = db.Queryable<ResourceEntity, ResourceTypeEntity>((de1, de2) => new object[] {
                     JoinType.Left,de1.resourcetypeid == de2.resourcetypeid
-                    }).WhereIF(typeid != 0, (de1, de2) => typeids.Contains(de1.resourcetypeid))
-                    .WhereIF(!string.IsNullOrEmpty(name), (de1, de2) => de1.resourcename == name)
+                    })
+                    //树节点获取下面的所有数据
+                    .WhereIF(typeid != 1 && typeid !=0, (de1, de2) => typeids.Contains(de1.resourcetypeid))
+                    .WhereIF(!string.IsNullOrEmpty(name), (de1, de2) => de1.resourcename.Contains(name))
                     .Select((de1, de2) => new ResourceEntity
                     {
                        resourceid = de1.resourceid,
@@ -47,7 +49,7 @@ namespace Arcgis.Service
                        resourcetypeid = de1.resourcetypeid,
                        sender = de1.sender,
                        createtime = de1.createtime,
-                       url = de1.url,
+                       url = de1.resourcedir,
                        filesize = de1.filesize,
                        encryption = de1.encryption
                     }).ToPageList(pageIndex, pageSize, ref totalCount);

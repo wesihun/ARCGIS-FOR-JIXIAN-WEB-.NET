@@ -39,6 +39,6 @@ namespace Arcgis.Entities
         /// <summary>
         /// 创建时间 
         /// </summary>
-        public string createtime { get; set; }
+        public DateTime createtime { get; set; }
     }
 }

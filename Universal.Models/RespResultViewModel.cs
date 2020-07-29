@@ -21,5 +21,11 @@ namespace Universal.Models
         //public string statusName { get; set; }
 
     }
-    
+    public class RespViewModel : RespResultViewModel
+    {
+        public int count { get; set; }
+        public int loginCount { get; set; }
+
+    }
+
 }
